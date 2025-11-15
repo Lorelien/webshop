@@ -1,3 +1,9 @@
+<?php 
+
+include 'db.php'; 
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -7,46 +13,33 @@
 </head>
 <body>
   <header>
-    <h1>📚 Boekenwebshop</h1>
-    <nav>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Categorieën</a></li>
-        <li><a href="#">Bestellingen</a></li>
-      </ul>
-    </nav>
+    <h1>📚 Mijn Boekenwebshop</h1>
+    <?php
+  if (isset($_SESSION['user_id'])) {
+    echo "<p>Welkom, " . htmlspecialchars($_SESSION['firstname']) . "!</p>";
+    echo "<a href='logout.php'>Uitloggen</a>";
+  } else {
+    echo "<a href='login.php'>Inloggen</a> | <a href='register.php'>Registreren</a>";
+  }
+  ?>
+
   </header>
 
   <main>
-    <section class="filters">
-      <label for="category">Filter op categorie:</label>
-      <select id="category">
-        <option>Alle</option>
-        <option>Fantasy</option>
-        <option>Thriller</option>
-        <option>Horror</option>
-        <option>Non-fictie</option>
-      </select>
-    </section>
-
     <section class="book-list">
-      <article class="book-card">
-        <img src="book1.jpg" alt="Boekcover">
-        <h2>De verborgen stad</h2>
-        <p>Auteur: Naam</p>
-        <p>Genre: Fantasy</p>
-        <p>Prijs: €19,99</p>
-        <button>Bestel</button>
-      </article>
-
-      <article class="book-card">
-        <img src="book2.jpg" alt="Boekcover">
-        <h2>De schaduwcode</h2>
-        <p>Auteur: Naam</p>
-        <p>Genre: Thriller</p>
-        <p>Prijs: €14,99</p>
-        <button>Bestel</button>
-      </article>
+      <?php
+      $stmt = $pdo->query("SELECT cover_image, title, author, genre, price FROM books");
+      while ($book = $stmt->fetch()) {
+        echo "<article class='book-card'>";
+        echo "<img src='images/" . htmlspecialchars($book['cover_image']) . "' alt='Boekcover'>";
+        echo "<h2>" . htmlspecialchars($book['title']) . "</h2>";
+        echo "<p class='author'>Auteur: " . htmlspecialchars($book['author']) . "</p>";
+        echo "<p class='genre'>Genre: " . htmlspecialchars($book['genre']) . "</p>";
+        echo "<p class='price'>Prijs: €" . number_format($book['price'], 2, ',', '.') . "</p>";
+        echo "<button>Bestel</button>";
+        echo "</article>";
+      }
+      ?>
     </section>
   </main>
 
