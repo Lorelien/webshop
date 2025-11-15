@@ -36,12 +36,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       <input type="email" name="email" placeholder="E-mail" class="form-input" required>
       <input type="password" name="password" placeholder="Wachtwoord" class="form-input" required>
       <button type="submit" class="form-button">Maak account aan</button>
-      <p class="form-footer"><a href="register.php">Heb je al een account? Log hier in</a></p>
+      <p class="form-footer"><a href="login.php">Heb je al een account? Log hier in</a></p>
     </form>
   </div>
 </div>
 
-<p><a href="index.php">← Terug naar webshop</a></p>
 
 </body>
 </html>

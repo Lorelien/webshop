@@ -40,7 +40,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </div>
 
 
-<p><a href="index.php">← Terug naar webshop</a></p>
-
 </body>
 </html>
