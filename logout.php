@@ -1,5 +1,6 @@
 <?php
-session_start();
-session_destroy();
-header("Location: index.php");
+require_once 'User.php';
+$user = new User();
+$user->logout();
+header('Location: index.php');
 exit;

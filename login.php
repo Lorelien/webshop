@@ -1,23 +1,18 @@
 <?php include 'db.php'; session_start(); ?>
 <?php
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-  $email = $_POST['email'];
-  $password = $_POST['password'];
+require_once 'User.php';
+$user = new User();
 
-  $stmt = $pdo->prepare("SELECT user_id, firstname, password_hash FROM users WHERE email = ?");
-  $stmt->execute([$email]);
-  $user = $stmt->fetch();
-
-  if ($user && password_verify($password, $user['password_hash'])) {
-    $_SESSION['user_id'] = $user['user_id'];
-    $_SESSION['firstname'] = $user['firstname'];
-    header("Location: index.php");
-    exit;
-  } else {
-    echo "<p class='error'>❌ Ongeldige login</p>";
-  }
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($user->login($_POST['email'], $_POST['password'])) {
+        header('Location: index.php');
+        exit;
+    } else {
+        $error = "Ongeldige login";
+    }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
