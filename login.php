@@ -11,9 +11,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   if ($user && password_verify($password, $user['password_hash'])) {
     $_SESSION['user_id'] = $user['user_id'];
     $_SESSION['firstname'] = $user['firstname'];
-    echo "✅ Welkom terug, " . htmlspecialchars($user['firstname']) . "!";
+    header("Location: index.php");
+    exit;
   } else {
-    echo "❌ Ongeldige login";
+    echo "<p class='error'>❌ Ongeldige login</p>";
   }
 }
 ?>

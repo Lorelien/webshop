@@ -10,7 +10,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $stmt = $pdo->prepare("INSERT INTO users (firstname, lastname, email, password_hash, created_at) VALUES (?, ?, ?, ?, NOW())");
   try {
     $stmt->execute([$firstname, $lastname, $email, $hash]);
-    echo "✅ Account aangemaakt!";
+    header("Location: login.php");
+    exit;
   } catch (PDOException $e) {
     echo "❌ Fout: " . $e->getMessage();
   }
