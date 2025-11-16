@@ -1,13 +1,14 @@
 <?php
 session_start();
-include 'db.php';
+include 'db.php'; 
+
 ?>
 <!DOCTYPE html>
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
   <title>Boekenwebshop</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/webshop/style.css">
 </head>
 <body>
 
