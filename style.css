@@ -1,45 +1,80 @@
+/* ========== BASISSTIJL ========== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: 'Segoe UI', sans-serif;
-  margin: 0;
-  background-color: #f9f9f9;
+  background-color: #f2f2f2;
   color: #333;
+  line-height: 1.6;
 }
 
-nav ul {
-  list-style: none;
-  padding: 0;
+/* ========== HEADER ========== */
+.main-header {
+  background-color: #4a90e2;
+  color: white;
+  padding: 1rem 0;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
   display: flex;
-  justify-content: center;
-  gap: 2rem;
+  justify-content: space-between;
+  align-items: center;
 }
 
-nav a {
+.header-left h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-right a {
   color: white;
   text-decoration: none;
   font-weight: bold;
 }
 
-.filters {
-  margin: 2rem;
-  text-align: center;
+.header-right a:hover {
+  text-decoration: underline;
 }
 
+.header-right span {
+  font-weight: 500;
+}
+
+/* ========== BOEKENLIJST ========== */
 .book-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
-  padding: 1rem;
+  padding: 2rem;
 }
 
 .book-card {
   background-color: white;
   border: 1px solid #ddd;
   border-radius: 8px;
-  width: 200px;
+  width: 220px;
   padding: 1rem;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.book-card:hover {
+  transform: translateY(-4px);
 }
 
 .book-card img {
@@ -48,27 +83,36 @@ nav a {
   border-radius: 4px;
 }
 
-button {
-  background-color: #e22245;
+.book-card h2 {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+}
+
+.book-card p {
+  margin: 0.3rem 0;
+}
+
+.book-card .price {
+  font-weight: bold;
+  color: #4a90e2;
+}
+
+.book-card button {
+  background-color: #4a90e2;
   color: white;
   border: none;
   padding: 0.5rem 1rem;
   margin-top: 0.5rem;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
-button:hover {
-  background-color: #e9495f;
+.book-card button:hover {
+  background-color: #357ab8;
 }
 
-footer {
-  background-color: #eee;
-  text-align: center;
-  padding: 1rem;
-  margin-top: 2rem;
-}
-
+/* ========== FORMULIEREN (LOGIN & REGISTRATIE) ========== */
 .form-wrapper {
   display: flex;
   justify-content: center;
@@ -78,7 +122,7 @@ footer {
 }
 
 .form-box {
-  background-color: #e22245;
+  background-color: #4a90e2;
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 6px 12px rgba(0,0,0,0.2);
@@ -95,11 +139,11 @@ form {
 .form-title {
   text-align: center;
   margin-bottom: 1.5rem;
-  color: #e22245;
+  color: #4a90e2;
 }
 
 .form-input {
-  width: 90%;
+  width: 100%;
   padding: 0.75rem;
   margin-bottom: 1rem;
   border: 1px solid #ccc;
@@ -110,7 +154,7 @@ form {
 .form-button {
   width: 100%;
   padding: 0.75rem;
-  background-color: #e22245;
+  background-color: #4a90e2;
   color: white;
   border: none;
   border-radius: 4px;
@@ -119,7 +163,7 @@ form {
 }
 
 .form-button:hover {
-  background-color: #e9495f;
+  background-color: #357ab8;
 }
 
 .form-footer {
@@ -129,7 +173,7 @@ form {
 }
 
 .form-footer a {
-  color: #e22245;
+  color: #4a90e2;
   text-decoration: none;
 }
 
@@ -137,8 +181,36 @@ form {
   text-decoration: underline;
 }
 
+/* ========== FOUTMELDINGEN ========== */
 .error {
   color: red;
   text-align: center;
   margin-top: 1rem;
+}
+
+/* ========== FOOTER ========== */
+footer {
+  background-color: #eee;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 600px) {
+  .book-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .header-right {
+    align-self: flex-end;
+  }
 }

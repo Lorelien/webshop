@@ -1,8 +1,6 @@
-<?php 
-
-include 'db.php'; 
+<?php
 session_start();
-
+include 'db.php';
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -12,30 +10,32 @@ session_start();
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
   <header class="main-header">
-  <div class="header-left">
-    <h1>Mijn Boekenwebshop</h1>
-  </div>
-  <div class="header-right">
-    <?php if (isset($_SESSION['user_id'])): ?>
-      <span>Welkom, <?= htmlspecialchars($_SESSION['firstname']) ?>!</span>
-      <a href="logout.php">Uitloggen</a>
-    <?php else: ?>
-      <a href="login.php">Inloggen</a>
-      <a href="register.php">Registreren</a>
-    <?php endif; ?>
-  </div>
-</header>
-
-
+    <div class="header-container">
+      <div class="header-left">
+        <h1>Mijn Boekenwebshop</h1>
+      </div>
+      <div class="header-right">
+        <?php if (isset($_SESSION['user_id'])): ?>
+          <span>Welkom, <?= htmlspecialchars($_SESSION['firstname']) ?>!</span>
+          <a href="logout.php">Uitloggen</a>
+        <?php else: ?>
+          <a href="login.php">Inloggen</a>
+          <a href="register.php">Registreren</a>
+        <?php endif; ?>
+      </div>
+    </div>
+  </header>
 
   <main>
     <section class="book-list">
       <?php
-      $stmt = $pdo->query("SELECT cover_image, title, author, genre, price FROM books");
+      $stmt = $pdo->query("SELECT title, author, genre, price, cover_image FROM books");
       while ($book = $stmt->fetch()) {
         echo "<article class='book-card'>";
-        echo "<img src='images/" . htmlspecialchars($book['cover_image']) . "' alt='Boekcover'>";
+        $image = htmlspecialchars($book['cover_image'] ?? 'placeholder.jpg');
+        echo "<img src='images/$image' alt='Boekcover'>";
         echo "<h2>" . htmlspecialchars($book['title']) . "</h2>";
         echo "<p class='author'>Auteur: " . htmlspecialchars($book['author']) . "</p>";
         echo "<p class='genre'>Genre: " . htmlspecialchars($book['genre']) . "</p>";
@@ -50,5 +50,6 @@ session_start();
   <footer>
     <p>&copy; 2025 Mijn Boekenwebshop</p>
   </footer>
+
 </body>
 </html>
