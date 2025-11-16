@@ -1,5 +1,5 @@
 <?php
-require_once 'Database.php';
+require_once __DIR__ . '/db.php';
 
 class User {
     private $db;
@@ -10,11 +10,11 @@ class User {
     }
 
     public function login($email, $password) {
-        $stmt = $this->db->prepare("SELECT id, firstname, password FROM users WHERE email = ?");
+        $stmt = $this->db->prepare("SELECT user_id AS id, firstname, password_hash FROM users WHERE email = ?");
         $stmt->execute([$email]);
         $user = $stmt->fetch();
 
-        if ($user && password_verify($password, $user['password'])) {
+        if ($user && password_verify($password, $user['password_hash'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['firstname'] = $user['firstname'];
             return true;
@@ -23,12 +23,12 @@ class User {
     }
 
     public function register($firstname, $email, $password) {
-        $stmt = $this->db->prepare("SELECT id FROM users WHERE email = ?");
+        $stmt = $this->db->prepare("SELECT user_id FROM users WHERE email = ?");
         $stmt->execute([$email]);
         if ($stmt->fetch()) return false;
 
         $hashed = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $this->db->prepare("INSERT INTO users (firstname, email, password) VALUES (?, ?, ?)");
+        $stmt = $this->db->prepare("INSERT INTO users (firstname, email, password_hash) VALUES (?, ?, ?)");
         return $stmt->execute([$firstname, $email, $hashed]);
     }
 
