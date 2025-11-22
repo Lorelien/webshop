@@ -1,6 +1,6 @@
 <?php
-require_once 'User.php';
-require_once 'Book.php';
+require_once 'classes/User.php';
+require_once 'classes/Book.php';
 
 $user = new User();
 $book = new Book();
