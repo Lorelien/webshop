@@ -1,13 +1,40 @@
 <?php
-require_once __DIR__ . '/db.php';
+include_once(__DIR__ . 'Db.php');
 
 class User {
     private $db;
+    private $firstname;
+    private $email;
+    private $password;
 
-    public function __construct() {
-        $this->db = (new Database())->pdo;
-        session_start();
+    public function setDatabase(Database $database) {
+        $this->db = $database->getConnection();
+        return $this;
     }
+
+    public function setFirstname($firstname) { 
+        $this->firstname = $firstname; 
+        return $this;
+    }
+
+    public function setEmail($email) { 
+        $this->email = $email; 
+        return $this;
+    }
+
+    public function setPassword($password) { 
+        $this->password = $password; 
+        return $this;
+    }
+
+    public function getFirstname() { 
+        return $this->firstname; 
+    }
+    
+    public function getEmail() { 
+        return $this->email; 
+    }
+
 
     public function login($email, $password) {
         $stmt = $this->db->prepare("SELECT user_id AS id, firstname, password_hash FROM users WHERE email = ?");
