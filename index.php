@@ -1,9 +1,19 @@
 <?php
-include_once(__DIR__ . "/classes/Book.php");
-include_once(__DIR__ . "/classes/User.php");
+include_once(__DIR__ . '/classes/Db.php');
+include_once(__DIR__ . '/classes/Book.php');
+include_once(__DIR__ . '/classes/User.php');
+
+$db = new Database();
+$db->setHost('localhost');
+$db->setDbname('webshop');
+$db->setUser('root');
+$db->setPass('');
 
 $user = new User();
+$user->setDatabase($db);
+
 $book = new Book();
+$book->setDatabase($db);
 $books = $book->getAllBooks();
 
 if (session_status() === PHP_SESSION_NONE) {
